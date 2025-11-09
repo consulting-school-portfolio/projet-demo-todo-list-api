@@ -35,7 +35,7 @@ jobs:
 
       - name: Upload test report
         if: always()
-        uses: actions/upload-artifact@v4.0.0
+        uses: actions/upload-artifact@v4
         with:
           name: newman-report
-          path: "./postman/api-report.html"
+          path: postman/api-report.html

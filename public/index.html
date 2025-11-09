@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List Demo Project</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main id="container">
+      <h1>ToDo List Application using Express</h1>
+      <form id="taskForm">
+        <input
+          type="text"
+          id="title"
+          placeholder="Titre de la tache"
+          required
+        />
+        <input
+          type="text"
+          id="description"
+          placeholder="Description"
+          required
+        />
+        <button id="btnSubmit" type="submit">Ajouter</button>
+      </form>
+      <section id="tasks"></section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

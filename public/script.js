@@ -7,7 +7,7 @@ formulaire.addEventListener("submit", async (e) => {
   const title = document.getElementById("title").value;
   const description = document.getElementById("description").value;
 
-  if(!title.trim() || title.trim().length == 0) {
+  if (!title.trim() || title.trim().length == 0) {
     return;
   }
 
@@ -40,7 +40,11 @@ async function afficherTaches() {
 
     div.innerHTML = `
         <h3>Title: ${data[i].title}</h3>
-        ${data[i].description ? `<p>Description: ${data[i].description}</p>` : ''} 
+        ${
+          data[i].description
+            ? `<p>Description: ${data[i].description}</p>`
+            : ""
+        } 
         <p>Status : <strong>${
           data[i].completed ? "Terminé" : "En cours"
         } </strong></p>
@@ -51,12 +55,10 @@ async function afficherTaches() {
         }
         ${
           !data[i].completed
-            ? `<button onclick="updateTodo('${data[i].id}')">Modifier Todo</button>`
+            ? `<button onclick="updateTodo('${data[i]}')">Modifier Todo</button>`
             : ""
         }
-        ${
-            `<button onclick="deleteTodo('${data[i].id}')">Supprimer Todo</button>`
-        }
+        ${`<button onclick="deleteTodo('${data[i].id}')">Supprimer Todo</button>`}
     `;
     tasksContainer.appendChild(div);
     formulaire.reset();
@@ -64,10 +66,13 @@ async function afficherTaches() {
 }
 
 async function markAsComplete(id) {
-  const res = await fetch(`http://localhost:3000/api/v1/markTodoAsComplete/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-  });
+  const res = await fetch(
+    `http://localhost:3000/api/v1/markTodoAsComplete/${id}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
 
   if (!res.ok) {
     console.log("Erreur de mise a jour");
@@ -75,30 +80,33 @@ async function markAsComplete(id) {
   afficherTaches();
 }
 
-async function updateTodo(id) {
+async function updateTodo(todo) {
   let newTitle;
   let newDescription;
 
-  do{
-    newTitle = prompt('Enter a new title');
-   } while(newTitle !== null && newTitle === "")
+  do {
+    newTitle = prompt(todo.title);
+  } while (newTitle !== null && newTitle === "");
 
-  if(newTitle) {
-    newDescription = prompt('Enter new description');
+  if (newTitle) {
+    newDescription = prompt(todo.description);
   }
 
-  if(newTitle) {
-    const res = await fetch(`http://localhost:3000/api/v1/updateTodo/${id}`, {
+  if (newTitle) {
+    const res = await fetch(
+      `http://localhost:3000/api/v1/updateTodo/${todo.id}`,
+      {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            title: newTitle,
-            description: newDescription,
+          title: newTitle,
+          description: newDescription,
         }),
-    });
+      }
+    );
 
     if (!res.ok) {
-        console.log("Erreur de mise a jour");
+      console.log("Erreur de mise a jour");
     }
     afficherTaches();
   }

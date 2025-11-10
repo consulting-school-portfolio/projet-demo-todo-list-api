@@ -58,7 +58,7 @@ exports.deleteTodo = (req, res) => {
   }
 
   const deletedTask = todos.splice(index, 1);
-  return res.status(200).json({ message: "tache supprimée",deletedTask });
+  return res.status(200).json({ message: "tache supprimée", deletedTask });
 };
 
 exports.updateTodo = (req, res) => {
@@ -74,4 +74,4 @@ exports.updateTodo = (req, res) => {
   currentTodo.title = title;
   currentTodo.description = description;
   return res.json({ message: "todo modifié", currentTodo });
-}
+};

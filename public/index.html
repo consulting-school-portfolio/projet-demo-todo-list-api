@@ -8,18 +8,26 @@
   </head>
   <body>
     <main id="container">
-      <h1>ToDo List Application using Express</h1>
-      <form id="taskForm">
+      <h1 data-test="app-title">ToDo List Application using Express</h1>
+      <form id="taskForm" data-test="form">
         <input
+          data-test="input-todo-title"
           type="text"
           id="title"
           placeholder="Titre de la tache"
           required
         />
-        <input type="text" id="description" placeholder="Description" />
-        <button id="btnSubmit" type="submit">Ajouter</button>
+        <input
+          data-test="input-todo-description"
+          type="text"
+          id="description"
+          placeholder="Description"
+        />
+        <button data-test="form-submit-button" id="btnSubmit" type="submit">
+          Ajouter
+        </button>
       </form>
-      <section id="tasks"></section>
+      <section data-test="todo-container" id="tasks"></section>
     </main>
 
     <script src="script.js"></script>

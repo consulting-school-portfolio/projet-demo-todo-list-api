@@ -39,3 +39,6 @@ jobs:
         with:
           name: newman-report
           path: ./postman/api-report.html
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
